@@ -3,69 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown</title>
+    <title>Wallapampa Teknival</title>
     <style>
-        /* Schwarzer Hintergrund */
         body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: url('https://github.com/derschander/akkinfo/blob/main/Untitled_Artwork.png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Lucida Console", Monaco, monospace;
+            color: white;
             text-align: center;
         }
-
-        /* Stil für den Text "GET READY TO BE ATTACKED" */
         h1 {
-            color: white;
-            font-size: 3em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* Stil für den Countdown */
-        #countdown {
-            font-size: 4em;
-            font-weight: bold;
-            color: red;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
 <body>
-
-    <div>
-        <h1>GET READY TO BE ATTACKED</h1>
-        <div id="countdown"></div>
-    </div>
-
-    <script>
-        // Ziel-Datum (28. Mai 2025)
-        const targetDate = new Date("May 28, 2025 00:00:00").getTime();
-
-        // Update der Zeit jede Sekunde
-        const interval = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            // Berechne die verbleibende Zeit in Tagen, Stunden, Minuten und Sekunden
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Anzeige des Countdowns
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-            // Wenn der Countdown abgelaufen ist
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-    </script>
-
+    <h1>WALLAPAMPA TEKNIVAL</h1>
 </body>
 </html>
+
