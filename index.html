@@ -20,7 +20,7 @@
             position: relative;
             flex-direction: column;
         }
-        
+
         /* Pop-up Stil */
         .popup {
             display: none; /* Startet als unsichtbar */
@@ -64,7 +64,7 @@
             margin-top: 15px;
             width: 100%; /* Button soll auf mobilen Geräten gut sichtbar und klickbar sein */
         }
-        
+
         /* Schließ-Kreuz */
         .close-btn {
             position: absolute;
@@ -73,6 +73,40 @@
             font-size: 30px;
             color: black;
             cursor: pointer;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            font-size: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .info-section:first-of-type {
+            margin-top: 10px;
+        }
+
+        .bottom-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -109,7 +143,7 @@
             <span class="close-btn" onclick="closePopup()">&times;</span>
             
             <!-- Screenshot von deinem Handy (ersetze 'DEINE-URL-HIER' mit deiner URL) -->
-            <img src="https://github.com/derschander/akkinfo/blob/main/tekalogue.png?raw=true" alt="Screenshot" />
+            <img src="DEINE-URL-HIER" alt="Screenshot" />
             
             <button onclick="closePopup()">OK</button>
         </div>
