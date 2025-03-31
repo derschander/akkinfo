@@ -18,79 +18,61 @@
             color: white;
             text-align: center;
             position: relative;
+            flex-direction: column;
         }
         .container {
-            position: absolute;
-            top: 10%;
-            width: 100%;
+            width: 90%;
+            max-width: 600px;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            margin: 0;
+            margin-bottom: 5px;
         }
         .subtitle {
             font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .info-section {
+            font-size: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .info-section:first-of-type {
             margin-top: 10px;
         }
-        .top-left {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.2rem;
-        }
-        .left-text {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: left;
-            font-size: 1rem;
-        }
-        .right-text {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: right;
-            font-size: 1rem;
-        }
         .bottom-text {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
             font-size: 1.2rem;
             font-weight: bold;
-        }
-        .middle-text {
-            font-size: 1.5rem;
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="top-left">East Germany</div>
     <div class="container">
         <h1>WALLAPAMPA TEKNIVAL</h1>
         <div class="subtitle">48h underground freeparty</div>
+        <div class="info-section">~East Germany Area~</div>
+        <div class="info-section">
+            FIRE SHOW<br>
+            FOOD<br>
+            SHOWLIGHT AND MAPPING<br>
+            BIG DECO<br>
+            OPEN FOR ALL ARTISTS AND PERFORMERS
+        </div>
+        <div class="info-section">
+            NO SOCIAL MEDIA<br>
+            NO FASCISM OR SEXISM<br>
+            NO BALLOONS<br>
+            <br>
+            BRING YOUR TRASHBAG<br>
+            BRING YOUR CUP<br>
+            AND CLEAN UP!
+        </div>
+        <div class="info-section">...MORE INFOS COMING SOON...</div>
+        <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek</div>
     </div>
-    <div class="middle-text">...more infos coming soon...</div>
-    <div class="left-text">
-        fire show<br>
-        food<br>
-        showlight and mapping<br>
-        big deco<br>
-        OPEN FOR ALL ARTISTS AND PERFORMERS
-    </div>
-    <div class="right-text">
-        NO social media<br>
-        NO fascism or sexism<br>
-        NO balloons<br>
-        <br>
-        bring your trashbag<br>
-        bring your cup<br>
-        and clean up!
-    </div>
-    <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek</div>
 </body>
 </html>
