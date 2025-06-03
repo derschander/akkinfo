@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallapampa Teknival</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('https://github.com/derschander/akkinfo/blob/main/Untitled_Artwork.png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Lucida Console", Monaco, monospace;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            display: none; /* wird erst nach Passwort-Eingabe angezeigt */
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            padding-top: 5vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .bottom-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Pop-up Fenster */
+        .popup, .password-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content, .password-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .popup-content img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hauptinhalt (versteckt bis Passwort korrekt) -->
+    <div class="container" id="mainContent">
+        <h1>WALLAPAMPA TEKNIVAL</h1>
+        <div class="subtitle">48h underground freeparty</div>
+        <div class="info-section">~East Germany Area~</div>
+        <div class="info-section">
+            BIG DECO<br>
+            SHOWLIGHT AND MAPPING<br>
+            FIRE SHOW<br>
+            OPEN FOR ALL ARTISTS AND PERFORMERS
+        </div>
+        <div class="info-section">
+            NO SOCIAL MEDIA<br>
+            NO FASCISM OR SEXISM<br>
+            NO BALLOONS<br><br>
+            BRING YOUR TRASHBAG<br>
+            BRING YOUR CUP<br>
+            AND CLEAN UP!
+        </div>
+        <div class="info-section">...MORE INFO COMING SOON...</div>
+        <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek</div>
+    </div>
+
+    <!-- Erstes Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeInitialPopup()">&times;</span>
+            <img src="https://github.com/derschander/akkinfo/blob/main/tekalogue.png?raw=true" alt="Flyer">
+            <button onclick="closeInitialPopup()">OK</button>
+        </div>
+    </div>
+
+    <!-- Passwortschutz Pop-up -->
+    <div id="passwordPopup" class="password-popup" style="display: none;">
+        <div class="password-content">
+            <p><strong>Frage / Question:</strong><br>Welche drei Wörter stehen unten links auf dem Flyer?<br><em>Which three words are bottom left on the flyer?</em></p>
+            <input type="text" id="passwordInput" placeholder="Antwort eingeben / Enter answer">
+            <div class="error" id="errorMsg" style="display: none;">Falsche Antwort / Wrong answer</div>
+            <button onclick="checkPassword()">Bestätigen / Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function closeInitialPopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("passwordPopup").style.display = "flex";
+        }
+
+        function checkPassword() {
+            const correctAnswers = ["no social media", "No Social Media", "NO SOCIAL MEDIA"];
+            const input = document.getElementById("passwordInput").value.trim();
+
+            if (correctAnswers.includes(input)) {
+                document.getElementById("passwordPopup").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
+            } else {
+                document.getElementById("errorMsg").style.display = "block";
+            }
+        }
+
+        // Zeige erstes Pop-up beim Laden
+        window.onload = function() {
+            document.getElementById("popup").style.display = "flex";
+        };
+    </script>
+
+</body>
+</html>
 
