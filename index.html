@@ -17,7 +17,7 @@
         }
 
         .container {
-            display: none; /* wird erst nach Passwort-Eingabe angezeigt */
+            display: none;
             width: 90%;
             max-width: 600px;
             margin: auto;
@@ -48,7 +48,6 @@
             margin-top: 20px;
         }
 
-        /* Pop-up Fenster */
         .popup, .password-popup {
             position: fixed;
             top: 0;
@@ -117,21 +116,21 @@
 </head>
 <body>
 
-    <!-- Hauptinhalt (versteckt bis Passwort korrekt) -->
+    <!-- Hauptinhalt -->
     <div class="container" id="mainContent">
-        <h1>WALLAPAMPA TEKNIVAL</h1>
+        <h1>WALLA KRISE FREETEK</h1>
         <div class="subtitle">48h underground freeparty</div>
         <div class="info-section">~East Germany Area~</div>
         <div class="info-section">
-            BIG DECO<br>
+            50KW SOUNDWALL<br>
             SHOWLIGHT AND MAPPING<br>
             FIRE SHOW<br>
             OPEN FOR ALL ARTISTS AND PERFORMERS
         </div>
         <div class="info-section">
             NO SOCIAL MEDIA<br>
-            NO FASCISM OR SEXISM<br>
-            NO BALLOONS<br><br>
+            SAFER SPACE - NO TOLERANCE FOR ANY DISCRIMINATION<br>
+            NO BALLOONS NO GHB<br><br>
             BRING YOUR TRASHBAG<br>
             BRING YOUR CUP<br>
             AND CLEAN UP!
@@ -149,7 +148,7 @@
         </div>
     </div>
 
-    <!-- Passwortschutz Pop-up -->
+    <!-- Passwort Pop-up -->
     <div id="passwordPopup" class="password-popup" style="display: none;">
         <div class="password-content">
             <p><strong>Frage / Question:</strong><br>Welche drei Wörter stehen unten links auf dem Flyer?<br><em>Which three words are bottom left on the flyer?</em></p>
@@ -166,10 +165,10 @@
         }
 
         function checkPassword() {
-            const correctAnswers = ["no social media", "No Social Media", "NO SOCIAL MEDIA"];
-            const input = document.getElementById("passwordInput").value.trim();
+            const correctAnswer = "no social media";
+            const input = document.getElementById("passwordInput").value.trim().toLowerCase();
 
-            if (correctAnswers.includes(input)) {
+            if (input === correctAnswer) {
                 document.getElementById("passwordPopup").style.display = "none";
                 document.getElementById("mainContent").style.display = "block";
             } else {
@@ -177,7 +176,6 @@
             }
         }
 
-        // Zeige erstes Pop-up beim Laden
         window.onload = function() {
             document.getElementById("popup").style.display = "flex";
         };
@@ -185,4 +183,3 @@
 
 </body>
 </html>
-
