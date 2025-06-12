@@ -15,6 +15,7 @@
             color: white;
             text-align: center;
         }
+
         .container {
             display: none;
             width: 90%;
@@ -22,28 +23,32 @@
             margin: auto;
             padding-top: 5vh;
         }
+
         h1 {
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 5px;
         }
+
         .subtitle {
             font-size: 1.5rem;
             margin-bottom: 30px;
         }
+
         .info-section {
             font-size: 1rem;
             text-transform: uppercase;
             margin-bottom: 20px;
             line-height: 1.6;
         }
+
         .bottom-text {
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 20px;
         }
-        .popup,
-        .password-popup {
+
+        .popup, .password-popup {
             position: fixed;
             top: 0;
             left: 0;
@@ -55,8 +60,8 @@
             align-items: center;
             z-index: 1000;
         }
-        .popup-content,
-        .password-content {
+
+        .popup-content, .password-content {
             background: white;
             color: black;
             padding: 20px;
@@ -66,14 +71,16 @@
             max-width: 400px;
             position: relative;
         }
+
         .popup-content img {
             width: 100%;
             border-radius: 10px;
         }
+
         button {
             padding: 12px 20px;
             font-size: 16px;
-            background-color: #4caf50;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -81,6 +88,7 @@
             margin-top: 15px;
             width: 100%;
         }
+
         .close-btn {
             position: absolute;
             top: 10px;
@@ -90,6 +98,7 @@
             color: black;
             cursor: pointer;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -98,9 +107,31 @@
             border-radius: 5px;
             font-size: 16px;
         }
+
         .error {
             color: red;
             margin-top: 10px;
+        }
+
+        #infoSwitch {
+            /* damit Text nicht text-transform uppercase überschreibt */
+            text-transform: none;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        #countdown {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+
+        #spotImages img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -109,9 +140,16 @@
     <div class="container" id="mainContent">
         <h1>WALLAKRISE FREETEK</h1>
         <div class="subtitle">48h underground freeparty</div>
+
+        <!-- Info-Bereich mit dynamischem Text -->
         <div class="info-section" id="infoSwitch">
-            <!-- Dynamischer Text / Countdown -->
+            ~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM
         </div>
+
+        <div class="info-section" id="countdown" style="display:none;">
+            <!-- Countdown wird hier angezeigt -->
+        </div>
+
         <div class="info-section">
             50KW SOUNDWALL<br />
             SHOWLIGHT AND MAPPING<br />
@@ -126,9 +164,19 @@
             BRING YOUR TRASHBAG<br />
             BRING YOUR CUP<br />
             AND CLEAN UP!<br /><br />
-            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum<br />
+            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum
+            <br />
             and more
         </div>
+
+        <div class="info-section" id="spotCoords" style="display:none;">
+            SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
+            <div id="spotImages">
+                <img src="https://github.com/derschander/akkinfo/blob/main/xxx.jpg?raw=true" alt="Spot Image 1" />
+                <img src="https://github.com/derschander/akkinfo/blob/main/spot%20anfahrt.png?raw=true" alt="Spot Image 2" />
+            </div>
+        </div>
+
         <div class="info-section">...MORE INFO COMING SOON...</div>
         <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek - FluctusMotus</div>
     </div>
@@ -143,14 +191,11 @@
     </div>
 
     <!-- Passwort Pop-up -->
-    <div id="passwordPopup" class="password-popup" style="display: none;">
+    <div id="passwordPopup" class="password-popup" style="display:none;">
         <div class="password-content">
-            <p>
-                <strong>Frage / Question:</strong><br />
-                Welche drei Wörter stehen unten links auf dem Flyer?<br /><em>Which three words are bottom left on the flyer?</em>
-            </p>
+            <p><strong>Frage / Question:</strong><br />Welche drei Wörter stehen unten links auf dem Flyer?<br /><em>Which three words are bottom left on the flyer?</em></p>
             <input type="text" id="passwordInput" placeholder="Antwort eingeben / Enter answer" />
-            <div class="error" id="errorMsg" style="display: none;">Falsche Antwort / Wrong answer</div>
+            <div class="error" id="errorMsg" style="display:none;">Falsche Antwort / Wrong answer</div>
             <button onclick="checkPassword()">Bestätigen / Submit</button>
         </div>
     </div>
@@ -163,9 +208,15 @@
 
         function checkPassword() {
             const correctAnswer = "no social media";
-            const input = document.getElementById("passwordInput").value.trim().toLowerCase();
+            let input = document.getElementById("passwordInput").value.trim().toLowerCase();
+            // Erlaubt alle Kombinationen mit "no social media" in beliebiger Reihenfolge und mit Leerzeichen
+            input = input.replace(/[^a-z\s]/g, ""); // nur Buchstaben und Leerzeichen
 
-            if (input === correctAnswer) {
+            // Check, ob alle drei Wörter vorhanden sind:
+            const requiredWords = ["no", "social", "media"];
+            const hasAllWords = requiredWords.every((word) => input.includes(word));
+
+            if (hasAllWords) {
                 document.getElementById("passwordPopup").style.display = "none";
                 document.getElementById("mainContent").style.display = "block";
             } else {
@@ -173,39 +224,90 @@
             }
         }
 
+        function updateCountdown(targetTime, now) {
+            const diff = targetTime - now;
+            if (diff <= 0) {
+                return null;
+            }
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            return `${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function showAfter19() {
+            // Textbereich anpassen
+            document.getElementById("infoSwitch").style.display = "none";
+            document.getElementById("countdown").style.display = "none";
+
+            // Spot Koordinaten anzeigen
+            document.getElementById("spotCoords").style.display = "block";
+        }
+
+        function showCountdown() {
+            document.getElementById("infoSwitch").innerHTML =
+                "~SPREMBERG AREA~<br />NEXT INFO: Friday 7PM";
+            document.getElementById("countdown").style.display = "block";
+            document.getElementById("spotCoords").style.display = "none";
+        }
+
+        // Demo-Startzeit: 19:01 Uhr Freitag (Demo, damit du sofort die 19+ Uhr Ansicht siehst)
+        // Wenn du das normale Verhalten willst, ersetze diese Zeile mit: new Date()
+        const demoNow = new Date();
+        demoNow.setHours(19, 1, 0, 0);
+
+        // echte Zeit zum Testen später:
+        // const demoNow = new Date();
+
+        // Für Vergleich mit Freitag 12 Uhr und 19 Uhr
+        function isFriday(date) {
+            return date.getDay() === 5;
+        }
+
         window.onload = function () {
             document.getElementById("popup").style.display = "flex";
 
-            // Für Demo: Setze "jetzt" fix auf Freitag 19:00:01 (direkt nach Countdownende)
-            const demoNow = new Date();
-            demoNow.setHours(19, 0, 1, 0); // 19:00:01 Uhr
-            startInfoSwitch(demoNow);
+            // Zeit-Check
+            let now = demoNow;
+
+            // Freitag 12 Uhr
+            const fri12 = new Date(now);
+            fri12.setHours(12, 0, 0, 0);
+
+            // Freitag 19 Uhr
+            const fri19 = new Date(now);
+            fri19.setHours(19, 0, 0, 0);
+
+            if (isFriday(now) && now >= fri19) {
+                // Nach 19 Uhr
+                showAfter19();
+            } else if (isFriday(now) && now >= fri12) {
+                // Zwischen 12 und 19 Uhr mit Countdown
+                showCountdown();
+
+                // Countdown bis 19 Uhr aktualisieren
+                function countdownTick() {
+                    now = new Date();
+                    const diff = fri19 - now;
+                    if (diff <= 0) {
+                        showAfter19();
+                        clearInterval(interval);
+                        return;
+                    }
+                    const cd = updateCountdown(fri19, now);
+                    document.getElementById("countdown").textContent = cd ? cd : "";
+                }
+
+                countdownTick();
+                var interval = setInterval(countdownTick, 1000);
+            } else {
+                // Vor 12 Uhr Freitag: Originaltext anzeigen
+                document.getElementById("infoSwitch").innerHTML =
+                    "~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM";
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("spotCoords").style.display = "none";
+            }
         };
-
-        function startInfoSwitch(now) {
-            const infoDiv = document.getElementById("infoSwitch");
-
-            const friday12 = new Date(now);
-            friday12.setHours(12, 0, 0, 0);
-
-            const friday19 = new Date(now);
-            friday19.setHours(19, 0, 0, 0);
-
-            function updateCountdown() {
-                const current = new Date();
-
-                let timeRemaining = friday19.getTime() - current.getTime();
-
-                if (timeRemaining > 0) {
-                    // Countdown läuft (in Demo nicht sichtbar, da Zeit fix auf 19:00:01)
-                    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-                    infoDiv.innerHTML =
-                        `~SPREMBERG AREA~<br>` +
-                        `NEXT INFO: Friday 7PM<br>` +
-                        `<span style="font-size: 1.4rem; font-weight: bold;">` +
-                        `${hours.toString().padStart(2, "0")}:` +
-                        `${minutes.toString().padStart(2, "0")}:` +
-                        `${seconds.to
+    </script>
+</body>
+</html>
