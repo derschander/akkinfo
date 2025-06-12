@@ -15,6 +15,7 @@
             color: white;
             text-align: center;
         }
+
         .container {
             display: none;
             width: 90%;
@@ -22,26 +23,31 @@
             margin: auto;
             padding-top: 5vh;
         }
+
         h1 {
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 5px;
         }
+
         .subtitle {
             font-size: 1.5rem;
             margin-bottom: 30px;
         }
+
         .info-section {
             font-size: 1rem;
             text-transform: uppercase;
             margin-bottom: 20px;
             line-height: 1.6;
         }
+
         .bottom-text {
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 20px;
         }
+
         .popup,
         .password-popup {
             position: fixed;
@@ -55,6 +61,7 @@
             align-items: center;
             z-index: 1000;
         }
+
         .popup-content,
         .password-content {
             background: white;
@@ -66,10 +73,12 @@
             max-width: 400px;
             position: relative;
         }
+
         .popup-content img {
             width: 100%;
             border-radius: 10px;
         }
+
         button {
             padding: 12px 20px;
             font-size: 16px;
@@ -81,6 +90,7 @@
             margin-top: 15px;
             width: 100%;
         }
+
         .close-btn {
             position: absolute;
             top: 10px;
@@ -90,6 +100,7 @@
             color: black;
             cursor: pointer;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -98,6 +109,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
+
         .error {
             color: red;
             margin-top: 10px;
@@ -109,7 +121,9 @@
     <div class="container" id="mainContent">
         <h1>WALLAKRISE FREETEK</h1>
         <div class="subtitle">48h underground freeparty</div>
-        <div class="info-section" id="infoSwitch">~SOUTH BRANDENBURG AREA~<br />NEW INFO: Friday 12PM</div>
+        <div class="info-section" id="infoSwitch">
+            <!-- Hier wird der Text oder Countdown rein -->
+        </div>
         <div class="info-section">
             50KW SOUNDWALL<br />
             SHOWLIGHT AND MAPPING<br />
@@ -123,10 +137,8 @@
             NO BALLOONS<br /><br />
             BRING YOUR TRASHBAG<br />
             BRING YOUR CUP<br />
-            AND CLEAN UP!
-            <br /><br />
-            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum
-            <br />
+            AND CLEAN UP!<br /><br />
+            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum<br />
             and more
         </div>
 
@@ -148,8 +160,7 @@
         <div class="password-content">
             <p>
                 <strong>Frage / Question:</strong><br />
-                Welche drei Wörter stehen unten links auf dem Flyer?<br />
-                <em>Which three words are bottom left on the flyer?</em>
+                Welche drei Wörter stehen unten links auf dem Flyer?<br /><em>Which three words are bottom left on the flyer?</em>
             </p>
             <input type="text" id="passwordInput" placeholder="Antwort eingeben / Enter answer" />
             <div class="error" id="errorMsg" style="display: none;">Falsche Antwort / Wrong answer</div>
@@ -157,92 +168,79 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         function closeInitialPopup() {
             document.getElementById("popup").style.display = "none";
             document.getElementById("passwordPopup").style.display = "flex";
         }
 
-      function checkPassword() {
-    const correctAnswer = "no social media";
-    const input = document.getElementById("passwordInput").value.trim().toLowerCase();
+        function checkPassword() {
+            const correctAnswer = "no social media";
+            const input = document.getElementById("passwordInput").value.trim().toLowerCase();
 
-    if (input === correctAnswer) {
-        document.getElementById("passwordPopup").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-    } else {
-        document.getElementById("errorMsg").style.display = "block";
-    }
-}
-
-
-        // Hilfsfunktion für Countdown-Format (hh:mm:ss)
-        function formatTime(duration) {
-            const hours = Math.floor(duration / 3600);
-            const minutes = Math.floor((duration % 3600) / 60);
-            const seconds = Math.floor(duration % 60);
-            return (
-                (hours < 10 ? "0" + hours : hours) +
-                ":" +
-                (minutes < 10 ? "0" + minutes : minutes) +
-                ":" +
-                (seconds < 10 ? "0" + seconds : seconds)
-            );
+            if (input === correctAnswer) {
+                document.getElementById("passwordPopup").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
+            } else {
+                document.getElementById("errorMsg").style.display = "block";
+            }
         }
 
         window.onload = function () {
             document.getElementById("popup").style.display = "flex";
 
-            const infoSwitch = document.getElementById("infoSwitch");
+            // Für Demo: Setze "jetzt" fix auf Freitag 12 Uhr mittags (damit Countdown startet)
+            // Datum: Jahr, Monat (0-basiert), Tag, Stunden, Minuten, Sekunden
+            const demoNow = new Date();
+            demoNow.setHours(12, 0, 0, 0); // 12:00:00 Uhr heute
 
-            // Zeiten definieren
-            const switchTime = new Date("2025-06-13T12:00:00");
-            const countdownEnd = new Date("2025-06-13T19:00:00");
-            const now = new Date();
-
-            if (now < switchTime) {
-                // Vor 12 Uhr: Originaltext
-                infoSwitch.innerHTML = "~SOUTH BRANDENBURG AREA~<br />NEW INFO: Friday 12PM";
-            } else if (now >= switchTime && now < countdownEnd) {
-                // Zwischen 12:00 und 19:00: Countdown starten
-                infoSwitch.innerHTML = "~SPREMBERG AREA~<br />NÄCHSTE INFO IN: <span id='countdown'>Lädt...</span>";
-
-                const countdownElement = document.getElementById("countdown");
-
-                function updateCountdown() {
-                    const nowInner = new Date();
-                    const diff = (countdownEnd - nowInner) / 1000;
-
-                    if (diff <= 0) {
-                        // Countdown vorbei, Text + Bilder anzeigen
-                        infoSwitch.innerHTML = `
-                          <div style="text-align:center;">
-                            <p>SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274</p>
-                            <img src="https://github.com/derschander/akkinfo/blob/main/spot1.png?raw=true" alt="Spot Bild 1" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                            <img src="https://github.com/derschander/akkinfo/blob/main/spot2.jpg?raw=true" alt="Spot Bild 2" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                          </div>
-                        `;
-                        clearInterval(timer);
-                        return;
-                    }
-
-                    countdownElement.textContent = formatTime(diff);
-                }
-
-                updateCountdown();
-                const timer = setInterval(updateCountdown, 1000);
-            } else {
-                // Nach 19 Uhr: Endtext + Bilder anzeigen
-                infoSwitch.innerHTML = `
-                  <div style="text-align:center;">
-                    <p>SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274</p>
-                    <img src="https://github.com/derschander/akkinfo/blob/main/spot1.png?raw=true" alt="Spot Bild 1" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                    <img src="https://github.com/derschander/akkinfo/blob/main/spot2.jpg?raw=true" alt="Spot Bild 2" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                  </div>
-                `;
-            }
+            startInfoSwitch(demoNow);
         };
+
+        function startInfoSwitch(now) {
+            const infoDiv = document.getElementById("infoSwitch");
+
+            // Für echte Seite nutze echten Zeitpunkt:
+            // const now = new Date();
+
+            const friday12 = new Date(now);
+            friday12.setHours(12, 0, 0, 0);
+
+            const friday19 = new Date(now);
+            friday19.setHours(19, 0, 0, 0);
+
+            function updateCountdown() {
+                const current = new Date();
+
+                let timeRemaining = friday19.getTime() - current.getTime();
+
+                if (timeRemaining > 0) {
+                    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                    infoDiv.innerHTML =
+                        `~SPREMBERG AREA~<br>` +
+                        `NEXT INFO: Friday 7PM<br>` +
+                        `<span style="font-size: 1.4rem; font-weight: bold;">` +
+                        `${hours.toString().padStart(2, "0")}:` +
+                        `${minutes.toString().padStart(2, "0")}:` +
+                        `${seconds.toString().padStart(2, "0")}` +
+                        `</span>`;
+                } else {
+                    infoDiv.innerHTML = `
+                        SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
+                        <br>
+                        <img src="https://github.com/derschander/akkinfo/blob/main/spot1.png?raw=true" alt="Spot Bild 1" style="max-width:100%; margin-top:10px; border-radius:10px;" />
+                        <img src="https://github.com/derschander/akkinfo/blob/main/spot2.jpg?raw=true" alt="Spot Bild 2" style="max-width:100%; margin-top:10px; border-radius:10px;" />
+                    `;
+                    clearInterval(intervalId);
+                }
+            }
+
+            updateCountdown();
+            const intervalId = setInterval(updateCountdown, 1000);
+        }
     </script>
 </body>
 </html>
