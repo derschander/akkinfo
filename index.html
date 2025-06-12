@@ -15,7 +15,6 @@
             color: white;
             text-align: center;
         }
-
         .container {
             display: none;
             width: 90%;
@@ -23,31 +22,26 @@
             margin: auto;
             padding-top: 5vh;
         }
-
         h1 {
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 5px;
         }
-
         .subtitle {
             font-size: 1.5rem;
             margin-bottom: 30px;
         }
-
         .info-section {
             font-size: 1rem;
             text-transform: uppercase;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-
         .bottom-text {
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 20px;
         }
-
         .popup,
         .password-popup {
             position: fixed;
@@ -61,7 +55,6 @@
             align-items: center;
             z-index: 1000;
         }
-
         .popup-content,
         .password-content {
             background: white;
@@ -73,12 +66,10 @@
             max-width: 400px;
             position: relative;
         }
-
         .popup-content img {
             width: 100%;
             border-radius: 10px;
         }
-
         button {
             padding: 12px 20px;
             font-size: 16px;
@@ -90,7 +81,6 @@
             margin-top: 15px;
             width: 100%;
         }
-
         .close-btn {
             position: absolute;
             top: 10px;
@@ -100,7 +90,6 @@
             color: black;
             cursor: pointer;
         }
-
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -109,7 +98,6 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
         .error {
             color: red;
             margin-top: 10px;
@@ -122,7 +110,7 @@
         <h1>WALLAKRISE FREETEK</h1>
         <div class="subtitle">48h underground freeparty</div>
         <div class="info-section" id="infoSwitch">
-            <!-- Hier wird der Text oder Countdown rein -->
+            <!-- Dynamischer Text / Countdown -->
         </div>
         <div class="info-section">
             50KW SOUNDWALL<br />
@@ -141,7 +129,6 @@
             Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum<br />
             and more
         </div>
-
         <div class="info-section">...MORE INFO COMING SOON...</div>
         <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek - FluctusMotus</div>
     </div>
@@ -210,7 +197,7 @@
                 let timeRemaining = friday19.getTime() - current.getTime();
 
                 if (timeRemaining > 0) {
-                    // Falls Countdown noch läuft (hier in Demo nicht)
+                    // Countdown läuft (in Demo nicht sichtbar, da Zeit fix auf 19:00:01)
                     const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
                     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
@@ -221,23 +208,4 @@
                         `<span style="font-size: 1.4rem; font-weight: bold;">` +
                         `${hours.toString().padStart(2, "0")}:` +
                         `${minutes.toString().padStart(2, "0")}:` +
-                        `${seconds.toString().padStart(2, "0")}` +
-                        `</span>`;
-                } else {
-                    // Nach 19 Uhr:
-                    infoDiv.innerHTML = `
-                        SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
-                        <br>
-                        <img src="https://github.com/derschander/akkinfo/blob/main/spot1.png?raw=true" alt="Spot Bild 1" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                        <img src="https://github.com/derschander/akkinfo/blob/main/spot2.jpg?raw=true" alt="Spot Bild 2" style="max-width:100%; margin-top:10px; border-radius:10px;" />
-                    `;
-                    clearInterval(intervalId);
-                }
-            }
-
-            updateCountdown();
-            const intervalId = setInterval(updateCountdown, 1000);
-        }
-    </script>
-</body>
-</html>
+                        `${seconds.to
