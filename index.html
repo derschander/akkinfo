@@ -189,19 +189,14 @@
         window.onload = function () {
             document.getElementById("popup").style.display = "flex";
 
-            // Für Demo: Setze "jetzt" fix auf Freitag 12 Uhr mittags (damit Countdown startet)
-            // Datum: Jahr, Monat (0-basiert), Tag, Stunden, Minuten, Sekunden
+            // Für Demo: Setze "jetzt" fix auf Freitag 19:00:01 (direkt nach Countdownende)
             const demoNow = new Date();
-            demoNow.setHours(12, 0, 0, 0); // 12:00:00 Uhr heute
-
+            demoNow.setHours(19, 0, 1, 0); // 19:00:01 Uhr
             startInfoSwitch(demoNow);
         };
 
         function startInfoSwitch(now) {
             const infoDiv = document.getElementById("infoSwitch");
-
-            // Für echte Seite nutze echten Zeitpunkt:
-            // const now = new Date();
 
             const friday12 = new Date(now);
             friday12.setHours(12, 0, 0, 0);
@@ -215,6 +210,7 @@
                 let timeRemaining = friday19.getTime() - current.getTime();
 
                 if (timeRemaining > 0) {
+                    // Falls Countdown noch läuft (hier in Demo nicht)
                     const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
                     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
@@ -228,6 +224,7 @@
                         `${seconds.toString().padStart(2, "0")}` +
                         `</span>`;
                 } else {
+                    // Nach 19 Uhr:
                     infoDiv.innerHTML = `
                         SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
                         <br>
