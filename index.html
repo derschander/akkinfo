@@ -1,282 +1,37 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WallaKrise Freetek</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treffpunkt</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: url('https://github.com/derschander/akkinfo/blob/main/Untitled_Artwork.png?raw=true') no-repeat center center fixed;
-            background-size: cover;
-            font-family: "Lucida Console", Monaco, monospace;
-            color: white;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
             text-align: center;
+            padding: 50px;
         }
-
-        .container {
-            display: none;
-            width: 90%;
-            max-width: 600px;
-            margin: auto;
-            padding-top: 5vh;
-        }
-
         h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            margin-bottom: 5px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
-
-        .subtitle {
-            font-size: 1.5rem;
+        p {
+            font-size: 1.2em;
             margin-bottom: 30px;
         }
-
-        .info-section {
-            font-size: 1rem;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .bottom-text {
-            font-size: 1.2rem;
+        .highlight {
+            color: #e67e22;
             font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .popup, .password-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content, .password-content {
-            background: white;
-            color: black;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-        }
-
-        .popup-content img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        button {
-            padding: 12px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            width: 100%;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            color: black;
-            cursor: pointer;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-
-        #spotImages img {
-            max-width: 100%;
-            margin: 10px 0;
-            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Hauptinhalt -->
-    <div class="container" id="mainContent">
-        <h1>WALLAKRISE FREETEK</h1>
-        <div class="subtitle">48h underground freeparty</div>
-
-        <!-- Spot Koordinaten + Bilder, erscheinen nach 19 Uhr -->
-        <div class="info-section" id="spotCoords" style="display:none;">
-            SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
-            <div id="spotImages">
-                <img src="https://github.com/derschander/akkinfo/blob/main/xxx.jpg?raw=true" alt="Spot Image 1" />
-                <img src="https://github.com/derschander/akkinfo/blob/main/spot%20anfahrt.png?raw=true" alt="Spot Image 2" />
-            </div>
-        </div>
-
-        <div class="info-section" id="infoSwitch">
-            ~SOUTH BRANDENBURG AREA~<br />NEW INFO: Friday 12PM
-        </div>
-
-        <div class="info-section" id="countdown" style="display:none;">
-            <!-- Countdown erscheint ab 12 Uhr bis 19 Uhr -->
-        </div>
-
-        <div class="info-section">
-            50KW SOUNDWALL<br />
-            SHOWLIGHT AND MAPPING<br />
-            FIRE SHOW<br />
-            OPEN FOR ALL ARTISTS AND PERFORMERS
-        </div>
-        <div class="info-section">
-            NO SOCIAL MEDIA<br />
-            SAFER SPACE - ZERO TOLERANCE FOR ANY DISCRIMINATION<br />
-            FIRST AID AND AWARENESS TEAM<br />
-            NO BALLOONS<br /><br />
-            BRING YOUR TRASHBAG<br />
-            BRING YOUR CUP<br />
-            AND CLEAN UP!<br /><br />
-            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum
-            <br />
-            and more
-        </div>
-
-        <div class="info-section">...MORE INFO COMING SOON...</div>
-        <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek - FluctusMotus</div>
-    </div>
-
-    <!-- Erstes Pop-up -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closeInitialPopup()">&times;</span>
-            <img src="https://github.com/derschander/akkinfo/blob/main/tekalogue.png?raw=true" alt="Flyer" />
-            <button onclick="closeInitialPopup()">OK</button>
-        </div>
-    </div>
-
-    <!-- Passwort Pop-up -->
-    <div id="passwordPopup" class="password-popup" style="display:none;">
-        <div class="password-content">
-            <p><strong>Frage / Question:</strong><br />Welche drei Wörter stehen unten links auf dem Flyer?<br /><em>Which three words are bottom left on the flyer?</em></p>
-            <input type="text" id="passwordInput" placeholder="Antwort eingeben / Enter answer" />
-            <div class="error" id="errorMsg" style="display:none;">Falsche Antwort / Wrong answer</div>
-            <button onclick="checkPassword()">Bestätigen / Submit</button>
-        </div>
-    </div>
-
-    <script>
-        function closeInitialPopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("passwordPopup").style.display = "flex";
-        }
-
-        function checkPassword() {
-            const correctAnswer = "no social media";
-            const input = document.getElementById("passwordInput").value.trim().toLowerCase();
-
-            // Tolerante Prüfung: Prüft nur, ob alle drei Wörter enthalten sind (no, social, media)
-            const words = input.split(/\s+/);
-            if (
-                words.includes("no") &&
-                words.includes("social") &&
-                words.includes("media")
-            ) {
-                document.getElementById("passwordPopup").style.display = "none";
-                document.getElementById("mainContent").style.display = "block";
-            } else {
-                document.getElementById("errorMsg").style.display = "block";
-            }
-        }
-
-        function updateInfoSection() {
-            const now = new Date();
-
-            // Event-Zeiten: Freitag 12 Uhr und 19 Uhr (13. Juni 2025)
-            const year = now.getFullYear();
-            const month = 5; // Juni (0-basiert, 0=Jan)
-            const day = 13; // 13. Juni
-            const twelvePM = new Date(year, month, day, 12, 0, 0);
-            const sevenPM = new Date(year, month, day, 19, 0, 0);
-
-            const infoSwitch = document.getElementById("infoSwitch");
-            const countdown = document.getElementById("countdown");
-            const spotCoords = document.getElementById("spotCoords");
-
-            if (now < twelvePM) {
-                // Vor 12 Uhr
-                infoSwitch.innerHTML = `~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM`;
-                countdown.style.display = "none";
-                spotCoords.style.display = "none";
-            } else if (now >= twelvePM && now < sevenPM) {
-                // Zwischen 12 Uhr und 19 Uhr
-                infoSwitch.innerHTML = `~SPREMBERG AREA~<br>FINAL INFO: Friday 7PM`;
-                countdown.style.display = "block";
-                spotCoords.style.display = "none";
-                startCountdown(sevenPM);
-            } else {
-                // Nach 19 Uhr
-                infoSwitch.style.display = "none";
-                countdown.style.display = "none";
-                spotCoords.style.display = "block";
-            }
-        }
-
-        let countdownInterval;
-
-        function startCountdown(targetTime) {
-            const countdown = document.getElementById("countdown");
-
-            function updateCountdown() {
-                const now = new Date();
-                const diff = targetTime - now;
-
-                if (diff <= 0) {
-                    clearInterval(countdownInterval);
-                    updateInfoSection(); // Wechselt dann auf die Spot Koordinaten
-                    return;
-                }
-
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                countdown.innerHTML = `Countdown bis 19 Uhr: ${hours
-                    .toString()
-                    .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
-                    .toString()
-                    .padStart(2, "0")}`;
-            }
-
-            updateCountdown();
-            countdownInterval = setInterval(updateCountdown, 1000);
-        }
-
-        window.onload = function () {
-            document.getElementById("popup").style.display = "flex";
-            updateInfoSection();
-        };
-    </script>
+    <h1>(51.5629309, 14.1109994)</h1>
+    <p class="highlight">Neuer Treffpunkt!</p>
+    <p>Nach all der ganzen Krise, lasst uns zusammen den Abend noch ausklingen.</p>
+    <p>Wir treffen uns an den gegeben Koordinaten auf dem Parkplatz am See.</p>
+    <p><strong>WIR HABEN EINE ZAPFANLAGE UND GEKÜHLTES BIER.</strong></p>
+    <p>Lasst uns zusammen das Beste draus machen (potenziell mit kleiner Anlage? ;) )</p>
 </body>
 </html>
