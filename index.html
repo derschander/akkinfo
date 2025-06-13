@@ -113,74 +113,59 @@
             margin-top: 10px;
         }
 
-        #infoSwitch {
-            /* damit Text nicht text-transform uppercase überschreibt */
-            text-transform: none;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        #countdown {
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            color: #ffcc00;
-        }
-
         #spotImages img {
             max-width: 100%;
+            margin: 10px 0;
             border-radius: 10px;
-            margin-top: 15px;
         }
     </style>
 </head>
 <body>
+
     <!-- Hauptinhalt -->
     <div class="container" id="mainContent">
-    <h1>WALLAKRISE FREETEK</h1>
-    <div class="subtitle">48h underground freeparty</div>
+        <h1>WALLAKRISE FREETEK</h1>
+        <div class="subtitle">48h underground freeparty</div>
 
-    <!-- Spot-Koordinaten und Bilder direkt unter dem Subtitle -->
-    <div class="info-section" id="spotCoords" style="display:none;">
-        SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
-        <div id="spotImages">
-            <img src="https://github.com/derschander/akkinfo/blob/main/xxx.jpg?raw=true" alt="Spot Image 1" />
-            <img src="https://github.com/derschander/akkinfo/blob/main/spot%20anfahrt.png?raw=true" alt="Spot Image 2" />
+        <!-- Spot Koordinaten + Bilder, erscheinen nach 19 Uhr -->
+        <div class="info-section" id="spotCoords" style="display:none;">
+            SPOT CORDS: 51.551660, 14.261398 ; Einfahrt: 51.538981, 14.268274
+            <div id="spotImages">
+                <img src="https://github.com/derschander/akkinfo/blob/main/xxx.jpg?raw=true" alt="Spot Image 1" />
+                <img src="https://github.com/derschander/akkinfo/blob/main/spot%20anfahrt.png?raw=true" alt="Spot Image 2" />
+            </div>
         </div>
-    </div>
 
-    <div class="info-section" id="infoSwitch">
-        ~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM
-    </div>
+        <div class="info-section" id="infoSwitch">
+            ~SOUTH BRANDENBURG AREA~<br />NEW INFO: Friday 12PM
+        </div>
 
-    <div class="info-section" id="countdown" style="display:none;">
-        <!-- Countdown wird hier angezeigt -->
-    </div>
+        <div class="info-section" id="countdown" style="display:none;">
+            <!-- Countdown erscheint ab 12 Uhr bis 19 Uhr -->
+        </div>
 
-    <div class="info-section">
-        50KW SOUNDWALL<br />
-        SHOWLIGHT AND MAPPING<br />
-        FIRE SHOW<br />
-        OPEN FOR ALL ARTISTS AND PERFORMERS
-    </div>
-    <div class="info-section">
-        NO SOCIAL MEDIA<br />
-        SAFER SPACE - ZERO TOLERANCE FOR ANY DISCRIMINATION<br />
-        FIRST AID AND AWARENESS TEAM<br />
-        NO BALLOONS<br /><br />
-        BRING YOUR TRASHBAG<br />
-        BRING YOUR CUP<br />
-        AND CLEAN UP!<br /><br />
-        Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum
-        <br />
-        and more
-    </div>
+        <div class="info-section">
+            50KW SOUNDWALL<br />
+            SHOWLIGHT AND MAPPING<br />
+            FIRE SHOW<br />
+            OPEN FOR ALL ARTISTS AND PERFORMERS
+        </div>
+        <div class="info-section">
+            NO SOCIAL MEDIA<br />
+            SAFER SPACE - ZERO TOLERANCE FOR ANY DISCRIMINATION<br />
+            FIRST AID AND AWARENESS TEAM<br />
+            NO BALLOONS<br /><br />
+            BRING YOUR TRASHBAG<br />
+            BRING YOUR CUP<br />
+            AND CLEAN UP!<br /><br />
+            Dimension303 - Zellip - Schienenersatzverkehr - Meddl - Paratek - Punkt - DieWeisheit - Tektatom - Mr.Pennerswagger - Schmutz ausm Osten - Molo - Momentum
+            <br />
+            and more
+        </div>
 
-    <div class="info-section">...MORE INFO COMING SOON...</div>
-    <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek - FluctusMotus</div>
-</div>
-
+        <div class="info-section">...MORE INFO COMING SOON...</div>
+        <div class="bottom-text">Netrakk - Fractaliens - DHT - Zeratek - FluctusMotus</div>
+    </div>
 
     <!-- Erstes Pop-up -->
     <div id="popup" class="popup">
@@ -209,15 +194,15 @@
 
         function checkPassword() {
             const correctAnswer = "no social media";
-            let input = document.getElementById("passwordInput").value.trim().toLowerCase();
-            // Erlaubt alle Kombinationen mit "no social media" in beliebiger Reihenfolge und mit Leerzeichen
-            input = input.replace(/[^a-z\s]/g, ""); // nur Buchstaben und Leerzeichen
+            const input = document.getElementById("passwordInput").value.trim().toLowerCase();
 
-            // Check, ob alle drei Wörter vorhanden sind:
-            const requiredWords = ["no", "social", "media"];
-            const hasAllWords = requiredWords.every((word) => input.includes(word));
-
-            if (hasAllWords) {
+            // Tolerante Prüfung: Prüft nur, ob alle drei Wörter enthalten sind (no, social, media)
+            const words = input.split(/\s+/);
+            if (
+                words.includes("no") &&
+                words.includes("social") &&
+                words.includes("media")
+            ) {
                 document.getElementById("passwordPopup").style.display = "none";
                 document.getElementById("mainContent").style.display = "block";
             } else {
@@ -225,89 +210,72 @@
             }
         }
 
-        function updateCountdown(targetTime, now) {
-            const diff = targetTime - now;
-            if (diff <= 0) {
-                return null;
+        function updateInfoSection() {
+            const now = new Date();
+
+            // Event-Zeiten: Freitag 12 Uhr und 19 Uhr (13. Juni 2025)
+            const year = now.getFullYear();
+            const month = 5; // Juni (0-basiert, 0=Jan)
+            const day = 13; // 13. Juni
+            const twelvePM = new Date(year, month, day, 12, 0, 0);
+            const sevenPM = new Date(year, month, day, 19, 0, 0);
+
+            const infoSwitch = document.getElementById("infoSwitch");
+            const countdown = document.getElementById("countdown");
+            const spotCoords = document.getElementById("spotCoords");
+
+            if (now < twelvePM) {
+                // Vor 12 Uhr
+                infoSwitch.innerHTML = `~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM`;
+                countdown.style.display = "none";
+                spotCoords.style.display = "none";
+            } else if (now >= twelvePM && now < sevenPM) {
+                // Zwischen 12 Uhr und 19 Uhr
+                infoSwitch.innerHTML = `~SPREMBERG AREA~<br>FINAL INFO: Friday 7PM`;
+                countdown.style.display = "block";
+                spotCoords.style.display = "none";
+                startCountdown(sevenPM);
+            } else {
+                // Nach 19 Uhr
+                infoSwitch.style.display = "none";
+                countdown.style.display = "none";
+                spotCoords.style.display = "block";
             }
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            return `${hours}h ${minutes}m ${seconds}s`;
         }
 
-        function showAfter19() {
-            // Textbereich anpassen
-            document.getElementById("infoSwitch").style.display = "none";
-            document.getElementById("countdown").style.display = "none";
+        let countdownInterval;
 
-            // Spot Koordinaten anzeigen
-            document.getElementById("spotCoords").style.display = "block";
-        }
+        function startCountdown(targetTime) {
+            const countdown = document.getElementById("countdown");
 
-        function showCountdown() {
-            document.getElementById("infoSwitch").innerHTML =
-                "~SPREMBERG AREA~<br />NEXT INFO: Friday 7PM";
-            document.getElementById("countdown").style.display = "block";
-            document.getElementById("spotCoords").style.display = "none";
-        }
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetTime - now;
 
-        // Demo-Startzeit: 19:01 Uhr Freitag (Demo, damit du sofort die 19+ Uhr Ansicht siehst)
-        // Wenn du das normale Verhalten willst, ersetze diese Zeile mit: new Date()
-        const demoNow = new Date();
-        demoNow.setHours(19, 1, 0, 0);
+                if (diff <= 0) {
+                    clearInterval(countdownInterval);
+                    updateInfoSection(); // Wechselt dann auf die Spot Koordinaten
+                    return;
+                }
 
-        // echte Zeit zum Testen später:
-        // const demoNow = new Date();
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        // Für Vergleich mit Freitag 12 Uhr und 19 Uhr
-        function isFriday(date) {
-            return date.getDay() === 5;
+                countdown.innerHTML = `Countdown bis 19 Uhr: ${hours
+                    .toString()
+                    .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+                    .toString()
+                    .padStart(2, "0")}`;
+            }
+
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
         }
 
         window.onload = function () {
             document.getElementById("popup").style.display = "flex";
-
-            // Zeit-Check
-            let now = demoNow;
-
-            // Freitag 12 Uhr
-            const fri12 = new Date(now);
-            fri12.setHours(12, 0, 0, 0);
-
-            // Freitag 19 Uhr
-            const fri19 = new Date(now);
-            fri19.setHours(19, 0, 0, 0);
-
-            if (isFriday(now) && now >= fri19) {
-                // Nach 19 Uhr
-                showAfter19();
-            } else if (isFriday(now) && now >= fri12) {
-                // Zwischen 12 und 19 Uhr mit Countdown
-                showCountdown();
-
-                // Countdown bis 19 Uhr aktualisieren
-                function countdownTick() {
-                    now = new Date();
-                    const diff = fri19 - now;
-                    if (diff <= 0) {
-                        showAfter19();
-                        clearInterval(interval);
-                        return;
-                    }
-                    const cd = updateCountdown(fri19, now);
-                    document.getElementById("countdown").textContent = cd ? cd : "";
-                }
-
-                countdownTick();
-                var interval = setInterval(countdownTick, 1000);
-            } else {
-                // Vor 12 Uhr Freitag: Originaltext anzeigen
-                document.getElementById("infoSwitch").innerHTML =
-                    "~SOUTH BRANDENBURG AREA~<br>NEW INFO: Friday 12PM";
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("spotCoords").style.display = "none";
-            }
+            updateInfoSection();
         };
     </script>
 </body>
